@@ -25,7 +25,7 @@ rm -rvf /src  && \
 rm -rvf /var/log/* && \
 echo "generating config" && \
 syncthing --generate="/config" && \
-sed -e "s/id=\"default\" path=\"\/root\/Sync\"/id=\"default\" path=\"\/data\/default\"/" -i /config/config.xml && \
+sed -e "s/id=\"default\" path=\"\/root\/Sync\"/id=\"default\" path=\"\/data\/default\"/" -i /config/config.xml 
 
 EXPOSE 8384 22000 21027/udp
 
