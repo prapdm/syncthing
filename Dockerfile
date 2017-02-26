@@ -11,10 +11,12 @@ wget --no-check-certificate https://github.com/syncthing/syncthing/releases/down
 tar zxvf sycnthing.tar.gz && \
 mv syncthing-linux-amd64-v$SYNCTHING_VERSION/syncthing /usr/sbin/ && \
 rm sycnthing.tar.gz -r && \
-mkdir -p /data /config && \
+mkdir -p /data && \
+mkdir -p /config && \
 addgroup -g 82 -S www-data && \
 adduser -u 82 -S -D -G www-data -h /data -s /sbin/nologin www-data && \
-chown -R www-data:www-data /data /config && \
+chown -R www-data:www-data /data && \
+chown -R www-data:www-data /config && \
 echo "Delete Build pkgs" && \
 apk del .build-dependencies && \
 rm -rvf /var/cache/apk/* && \
@@ -30,6 +32,6 @@ EXPOSE 8384 22000 21027/udp
 
 USER www-data
 
-VOLUME ["/data"]
+VOLUME ["/data", "/config"]
 
 CMD ["syncthing", "-no-browser", "-no-restart", "-gui-address=0.0.0.0:8384", "-home=/config"]
