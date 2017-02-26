@@ -24,7 +24,7 @@ rm -rvf /src  && \
 rm -rvf /var/log/* && \
 echo "generating config" && \
 syncthing --generate="/config" && \
-sed -e "s/id=\"default\" path=\"\/root\/Sync\"/id=\"default\" path=\"\/data\/default\"/" -i /config/config.xml && \
+sed -i "s/<folder id=\"default\" label=\"Default Folder\" path=\"\/root\/Sync\/\"/<folder id=\"default\" label=\"Default Folder\" path=\"\/data\/\"/"  /config/config.xml && \
 chown -R www-data:www-data /config 
 
 
