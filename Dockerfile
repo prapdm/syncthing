@@ -16,7 +16,6 @@ mkdir -p /config && \
 addgroup -g 82 -S www-data && \
 adduser -u 82 -S -D -G www-data -h /data -s /sbin/nologin www-data && \
 chown -R www-data:www-data /data && \
-chown -R www-data:www-data /config && \
 echo "Delete Build pkgs" && \
 apk del .build-dependencies && \
 rm -rvf /var/cache/apk/* && \
@@ -25,7 +24,9 @@ rm -rvf /src  && \
 rm -rvf /var/log/* && \
 echo "generating config" && \
 syncthing --generate="/config" && \
-sed -e "s/id=\"default\" path=\"\/root\/Sync\"/id=\"default\" path=\"\/data\/default\"/" -i /config/config.xml 
+sed -e "s/id=\"default\" path=\"\/root\/Sync\"/id=\"default\" path=\"\/data\/default\"/" -i /config/config.xml && \
+chown -R www-data:www-data /config 
+
 
 EXPOSE 8384 22000 21027/udp
 
