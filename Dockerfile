@@ -32,7 +32,7 @@ chown -R www-data:www-data /config
 
 EXPOSE 8384 22000 21027/udp
 
-#USER www-data
+USER www-data
 
 VOLUME ["/data", "/config"]
 
