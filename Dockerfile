@@ -38,4 +38,4 @@ EXPOSE 8384 22000 21027/udp
 
 VOLUME ["/data", "/config"]
 
-CMD ["su-exec", "www-data", "syncthing", "-no-browser", "-no-restart", "-gui-address=0.0.0.0:8384", "-home=/config"]
+CMD ["syncthing", "-no-browser", "-no-restart", "-gui-address=0.0.0.0:8384", "-home=/config"]
