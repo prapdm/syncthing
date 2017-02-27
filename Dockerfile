@@ -5,7 +5,10 @@ ENV SYNCTHING_VERSION=0.14.23
 
 RUN \
 apk update && apk upgrade && apk --update add --no-cache  --virtual .build-dependencies wget && \
-apk add --no-cache sudo
+cd /usr/local/bin/ && \
+wget --no-check-certificate  https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 && \
+mv gosu-amd64 gosu && \
+chmod +x /usr/local/bin/gosu
 
 RUN \
 wget --no-check-certificate https://github.com/syncthing/syncthing/releases/download/v$SYNCTHING_VERSION/syncthing-linux-amd64-v$SYNCTHING_VERSION.tar.gz -O sycnthing.tar.gz && \
@@ -28,7 +31,6 @@ syncthing --generate="/config" && \
 sed -i "s/<folder id=\"default\" label=\"Default Folder\" path=\"\/root\/Sync\/\"/<folder id=\"default\" label=\"Default Folder\" path=\"\/data\/\"/"  /config/config.xml && \
 sed -i "s/<globalAnnounceEnabled>true<\/globalAnnounceEnabled>/<globalAnnounceEnabled>false<\/globalAnnounceEnabled>/"  /config/config.xml && \
 sed -i "s/<address>127.0.0.1:8384<\/address>/<address>0.0.0.0:8384<\/address>/"  /config/config.xml && \
-echo '(www-data ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers && \
 chown -R www-data:www-data /config 
 
 
@@ -38,4 +40,4 @@ USER www-data
 
 VOLUME ["/data", "/config"]
 
-CMD ["syncthing", "-no-browser", "-no-restart", "-gui-address=0.0.0.0:8384", "-home=/config"]
+CMD ["gosu", "www-data", "syncthing", "-no-browser", "-no-restart", "-gui-address=0.0.0.0:8384", "-home=/config"]
