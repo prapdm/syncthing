@@ -30,8 +30,8 @@ syncthing --generate="/config" && \
 sed -i "s/<folder id=\"default\" label=\"Default Folder\" path=\"\/root\/Sync\/\"/<folder id=\"default\" label=\"Default Folder\" path=\"\/data\/\"/"  /config/config.xml && \
 sed -i "s/<globalAnnounceEnabled>true<\/globalAnnounceEnabled>/<globalAnnounceEnabled>false<\/globalAnnounceEnabled>/"  /config/config.xml && \
 sed -i "s/<address>127.0.0.1:8384<\/address>/<address>0.0.0.0:8384<\/address>/"  /config/config.xml && \
-chown -R www-data:www-data /config 
-
+chown -R www-data:www-data /config && \
+chmod u+s /sbin/su-exec
 
 EXPOSE 8384 22000 21027/udp
 
