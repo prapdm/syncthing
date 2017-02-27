@@ -4,7 +4,8 @@ MAINTAINER avenus.pl
 ENV SYNCTHING_VERSION=0.14.23
 
 RUN \
-apk update && apk upgrade && apk --update add --no-cache --virtual .build-dependencies wget
+apk update && apk upgrade && apk --update add --no-cache  --virtual .build-dependencies wget && \
+apk add --no-cache sudo
 
 RUN \
 wget --no-check-certificate https://github.com/syncthing/syncthing/releases/download/v$SYNCTHING_VERSION/syncthing-linux-amd64-v$SYNCTHING_VERSION.tar.gz -O sycnthing.tar.gz && \
