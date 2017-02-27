@@ -5,10 +5,9 @@ ENV SYNCTHING_VERSION=0.14.23
 
 RUN \
 apk update && apk upgrade && apk --update add --no-cache  --virtual .build-dependencies wget && \
-cd /usr/local/bin/ && \
-wget --no-check-certificate  https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 && \
-mv gosu-amd64 gosu && \
-chmod +x /usr/local/bin/gosu
+apk --update add su-exec
+
+
 
 RUN \
 wget --no-check-certificate https://github.com/syncthing/syncthing/releases/download/v$SYNCTHING_VERSION/syncthing-linux-amd64-v$SYNCTHING_VERSION.tar.gz -O sycnthing.tar.gz && \
@@ -40,4 +39,4 @@ USER www-data
 
 VOLUME ["/data", "/config"]
 
-CMD ["gosu", "www-data", "syncthing", "-no-browser", "-no-restart", "-gui-address=0.0.0.0:8384", "-home=/config"]
+CMD ["su-exec", "www-data", "syncthing", "-no-browser", "-no-restart", "-gui-address=0.0.0.0:8384", "-home=/config"]
