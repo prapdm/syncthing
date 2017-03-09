@@ -17,7 +17,7 @@ mkdir -p /data && \
 mkdir -p /config && \
 addgroup -g 82 -S www-data && \
 adduser -u 82 -S -D -G www-data -h /data -s /sbin/nologin www-data && \
-chown -R www-data:www-data /data /config && \
+chown -R www-data:www-data /data  && \
 echo "Delete Build pkgs" && \
 apk del .build-dependencies && \
 rm -rvf /var/cache/apk/* && \
