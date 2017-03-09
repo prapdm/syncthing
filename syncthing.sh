@@ -1,9 +1,9 @@
 #!/bin/sh
 
 
-CONFIG="/config"
+CONFIG="/config/config.xml"
 
-if [ ! -d "$CONFIG" ]; then
+if [ ! -e "$CONFIG" ]; then
 echo "generating config" 
 syncthing --generate="/config" 
 sed -i "s/<folder id=\"default\" label=\"Default Folder\" path=\"\/root\/Sync\/\"/<folder id=\"default\" label=\"Default Folder\" path=\"\/data\/\"/"  /config/config.xml  
