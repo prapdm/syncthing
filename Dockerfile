@@ -29,6 +29,7 @@ rm -rvf /var/log/*
 EXPOSE 8384 22000 21027/udp
 
 COPY syncthing.sh /syncthing.sh
+RUN chmod +x /syncthing.sh
 
 VOLUME ["/data", "/config"]
 
