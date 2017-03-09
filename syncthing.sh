@@ -9,4 +9,4 @@ sed -i "s/<autoUpgradeIntervalH>12<\/autoUpgradeIntervalH>/<autoUpgradeIntervalH
 
 
 #run syncthing
-syncthing -no-browser -no-restart -no-restart -no-restart
+syncthing -no-browser -no-restart -gui-address=0.0.0.0:8384 -home=/config
