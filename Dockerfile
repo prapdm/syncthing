@@ -1,7 +1,7 @@
 FROM alpine:3.4
 MAINTAINER avenus.pl
 
-ENV SYNCTHING_VERSION=0.14.24
+ENV SYNCTHING_VERSION=0.14.27
 
 RUN \
 apk update && apk upgrade && apk --update add --no-cache  --virtual .build-dependencies wget 
